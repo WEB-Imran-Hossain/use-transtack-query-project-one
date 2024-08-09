@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
-const retrieveProducts = async ({queryKey}) => {
+const retrieveProducts = async ({ queryKey }) => {
   const response = await axios.get(`http://localhost:3000/${queryKey[0]}`);
   return response.data;
 };
@@ -16,6 +16,7 @@ const ProductList = () => {
     queryKey: ["products"],
     queryFn: retrieveProducts,
     retry: false,
+    // refetchInterval: 1000,
   });
 
   if (isLoading) return <div>Fetching Products...</div>;

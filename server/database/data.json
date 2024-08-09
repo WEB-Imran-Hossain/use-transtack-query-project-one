@@ -9,22 +9,6 @@
       "thumbnail": "https://random.imagecdn.app/500/150"
     },
     {
-      "id": "4",
-      "title": "OPPOF19",
-      "description": "OPPO F19 is officially announced on April 2021.",
-      "price": 280,
-      "rating": 4.3,
-      "thumbnail": "https://random.imagecdn.app/500/150"
-    },
-    {
-      "id": "5",
-      "title": "Huawei P30",
-      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-      "price": 499,
-      "rating": 4.09,
-      "thumbnail": "https://random.imagecdn.app/500/150"
-    },
-    {
       "id": "6",
       "title": "MacBook Pro ",
       "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
@@ -42,7 +26,7 @@
     },
     {
       "id": "8",
-      "title": "Microsoft Surface Laptop 4",
+      "title": "Microsoft Surface",
       "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
       "price": 1499,
       "rating": 4.43,
@@ -58,7 +42,7 @@
     },
     {
       "id": "10",
-      "title": "HP Pavilion 15-DK1056WM",
+      "title": "HP Pavilion",
       "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
       "price": 1099,
       "rating": 4.43,
@@ -90,7 +74,7 @@
     },
     {
       "id": "14",
-      "title": "Non-Alcoholic Concentrated Perfume Oil",
+      "title": "Concentrated Perfume Oil",
       "description": "Original Al Munakh® by Mahal Al Musk | Our Impression of Climate | 6ml Non-Alcoholic Concentrated Perfume Oil",
       "price": 120,
       "rating": 4.21,
@@ -138,7 +122,7 @@
     },
     {
       "id": "20",
-      "title": "Freckle Treatment Cream- 15gm",
+      "title": "Freckle Treatment Cream",
       "description": "Fair & Clear is Pakistan's only pure Freckle cream which helpsfade Freckles, Darkspots and pigments. Mercury level is 0%, so there are no side effects.",
       "price": 70,
       "rating": 4.06,

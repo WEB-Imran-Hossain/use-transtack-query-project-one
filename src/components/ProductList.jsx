@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { SelectedProductContext} from "../context/SelectedProductContext";
 
 const retrieveProducts = async ({ queryKey }) => {
   const response = await axios.get(
     `http://localhost:3000/products?_page=${queryKey[1].page}_per_page=6}`
   );
-  return response.data;
+  return response?.data;
 };
 
 const ProductList = () => {
   const queryclient = useQueryClient();
-
   const [page, setPage] = useState(1);
+  const { setSelectedId } = useContext(SelectedProductContext);
 
   const {
     data: products,
@@ -22,7 +23,7 @@ const ProductList = () => {
     queryKey: ["products", { page }],
     queryFn: retrieveProducts,
     retry: false,
-    // refetchInterval: 1000,
+    refetchInterval: 1000 * 60 * 5,
   });
 
   // mutation function
@@ -55,36 +56,42 @@ const ProductList = () => {
   if (error) return <div>An error occured: {error.message}</div>;
 
   return (
-    <div className="flex flex-col justify-center items-center w-3/5">
-      <h2 className="text-3xl my-2">Product List</h2>
+    <div className="flex flex-col justify-center items-center w-1/2">
+      <h2 className="text-3xl my-2 font-bold">Product List</h2>
       <ul className="flex flex-wrap justify-center items-center">
         {products?.data &&
           products?.data?.map((product) => (
             <li
               key={product?.id}
               className="flex flex-col items-center m-2 border rounded-sm"
+              onClick={() => setSelectedId(product?.id)} // Set selected product ID on click
             >
               <img
-                className="object-cover h-64 w-96 rounded-sm"
+                className="object-cover h-96 w-96 rounded-sm cursor-pointer"
                 src={product?.thumbnail}
                 alt=""
               />
-              <p className="text-xl my-3">{product?.title}</p>
+
+              <div className="flex justify-between items-center w-full px-4">
+                <div>
+                  <p className="text-xl my-5 font-bold">{product?.title}</p>
+                </div>
+                <div>
+                  <button onClick={() => handleDelete(product?.id)}>
+                    <p className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                      Delete
+                    </p>
+                  </button>
+                </div>
+              </div>
             </li>
           ))}
-
-        {/* delete button  */}
-        <button
-          onClick={() => handleDelete(products?.product?.id)}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute right-2 top-5"
-        >
-          Delete
-        </button>
       </ul>
-      <div className="flex">
+
+      <div className="flex my-5 gap-2">
         {products.prev && (
           <button
-            className="p-1 mx-1 bg-gray-100 border cursor-pointer rounded-sm"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm cursor-pointer"
             onClick={() => setPage(products?.prev)}
           >
             {" "}
@@ -93,7 +100,7 @@ const ProductList = () => {
         )}
         {products.next && (
           <button
-            className="p-1 mx-1 bg-gray-100 border cursor-pointer rounded-sm"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm cursor-pointer"
             onClick={() => setPage(products?.next)}
           >
             {" "}

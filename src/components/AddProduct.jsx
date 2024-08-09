@@ -17,14 +17,30 @@ const AddProduct = () => {
     mutationFn: (newProduct) =>
       axios.post("http://localhost:3000/products", newProduct),
 
-    onSuccess: (data, variables, context) => {
-      console.log(context);
-      queryClient.invalidateQueries(["products"]);
-    },
-    onMutate: (variables) => {
-      return { greeting: "Say hello" };
-    },
-  });
+  //   onSuccess: (data, variables, context) => {
+  //     console.log(context);
+  //     queryClient.invalidateQueries(["products"]);
+  //   },
+  //   onMutate: (variables) => {
+  //     return { greeting: "Say hello" };
+  //   },
+  // });
+
+  onSuccess: () => {
+    // Reset the form state after a successful mutation
+    setState({
+      title: "",
+      description: "",
+      price: 0,
+      rating: 5,
+      thumbnail: "",
+    });
+    queryClient.invalidateQueries(["products"]);
+  },
+  onMutate: () => {
+    return { greeting: "Say hello" };
+  },
+});
 
   const submitData = (event) => {
     event.preventDefault();
@@ -54,50 +70,54 @@ const AddProduct = () => {
   }
 
   return (
-    <div className="m-2 p-2 bg-gray-100 w-1/5 h-1/2">
-      <h2 className="text-2xl my-2">Add a Product</h2>
-      {mutation.isSuccess && <p>Product Added!</p>}
-      <form className="flex flex-col" onSubmit={submitData}>
-        <input
-          type="text"
-          value={state.title}
-          name="title"
-          onChange={handleChange}
-          className="my-2 border p-2 rounded"
-          placeholder="Enter a product title"
-        />
-        <textarea
-          value={state.description}
-          name="description"
-          onChange={handleChange}
-          className="my-2 border p-2 rounded"
-          placeholder="Enter a product description"
-        />
+    <div className="w-1/4 my-2">
+      <div>
+        <h2 className="text-3xl my-2 font-bold text-center">Add a Product</h2>
+      </div>
+      <div className="m-2 p-6 bg-gray-100">
+        {mutation.isSuccess && <p>Product Added!</p>}
+        <form className="flex flex-col" onSubmit={submitData}>
+          <input
+            type="text"
+            value={state.title}
+            name="title"
+            onChange={handleChange}
+            className="my-2 border p-2 rounded"
+            placeholder="Enter a product title"
+          />
+          <textarea
+            value={state.description}
+            name="description"
+            onChange={handleChange}
+            className="my-2 border p-2 rounded"
+            placeholder="Enter a product description"
+          />
 
-        <input
-          type="number"
-          value={state.price}
-          name="price"
-          onChange={handleChange}
-          className="my-2 border p-2 rounded"
-          placeholder="Enter a product price"
-        />
-        <input
-          type="text"
-          value={state.thumbnail}
-          name="thumbnail"
-          onChange={handleChange}
-          className="my-2 border p-2 rounded"
-          placeholder="Enter a product thumbnail URL"
-        />
+          <input
+            type="number"
+            value={state.price}
+            name="price"
+            onChange={handleChange}
+            className="my-2 border p-2 rounded"
+            placeholder="Enter a product price"
+          />
+          <input
+            type="text"
+            value={state.thumbnail}
+            name="thumbnail"
+            onChange={handleChange}
+            className="my-2 border p-2 rounded"
+            placeholder="Enter a product thumbnail URL"
+          />
 
-        <button
-          type="submit"
-          className="bg-black m-auto text-white text-xl p-1 rounded-md"
-        >
-          Add
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-1/4 mx-auto"
+          >
+            Add
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

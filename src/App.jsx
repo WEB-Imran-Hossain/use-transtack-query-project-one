@@ -7,7 +7,7 @@ function App() {
     <div className="flex m-2">
       <AddProduct />
       <ProductList />
-      <ProductDetails id={1} />
+      <ProductDetails id={3} />
     </div>
   );
 }
